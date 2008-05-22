@@ -2,18 +2,22 @@
 
 package org.ry1.veneer.tag;
 
-import java.io.CharArrayWriter;
 import java.io.IOException;
 
 import javax.servlet.jsp.JspException;
 
 
 public class SetTag extends VeneerTagSupport {
-	private String name;
+	private String scopeName;
+	private String attributeName;
 	private Object value;
 	
+	public void setScopeName(String scopeName) {
+		this.scopeName = scopeName;
+	}
+	
 	public void setName(String name) {
-		this.name = name;
+		this.attributeName = name;
 	}
 	
 	public void setValue(Object value) {
@@ -23,11 +27,9 @@ public class SetTag extends VeneerTagSupport {
 	@Override
 	public void doTag() throws JspException, IOException {
 		if (value == null && getJspBody() != null) {
-			CharArrayWriter writer = new CharArrayWriter();
-			getJspBody().invoke(writer);
-			value = writer.toString();
+			value = getBody();
 		}
 		
-		setAttribute(name, value);
+		setAttribute(scopeName, attributeName, value);
 	}
 }

@@ -2,8 +2,6 @@
 
 package org.ry1.veneer.tag;
 
-import static org.ry1.veneer.Context.TEMPLATE_NAME_ATTRIBUTE_NAME;
-
 import java.io.IOException;
 
 import javax.servlet.jsp.JspException;
@@ -24,6 +22,6 @@ public class TemplateTag extends VeneerTagSupport {
 	@Override
 	public void doTag() throws JspException, IOException {
 		String templateName = skip ? null : name;
-		setAttribute(TEMPLATE_NAME_ATTRIBUTE_NAME, templateName);
+		getContext().setTemplateName(templateName);
 	}
 }

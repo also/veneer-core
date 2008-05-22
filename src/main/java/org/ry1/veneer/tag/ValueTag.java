@@ -2,7 +2,7 @@
 
 package org.ry1.veneer.tag;
 
-import static org.ry1.veneer.Context.CONTENT_FOR_LAYOUT_ATTRIBUTE_NAME;
+import static org.ry1.veneer.RenderContext.CONTENT_FOR_LAYOUT_ATTRIBUTE_NAME;
 
 import java.io.IOException;
 

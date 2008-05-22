@@ -26,6 +26,11 @@
 		<tag-class>org.ry1.veneer.tag.SetTag</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
+			<name>scope</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>name</name>
 			<required>true</required>
 		</attribute>
@@ -68,6 +73,29 @@
 		</attribute>
 		<attribute>
 			<name>partial</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>scope</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+
+	<tag>
+		<name>apply</name>
+		<tag-class>
+			org.ry1.veneer.tag.ApplyTag
+		</tag-class>
+		<body-content>scriptless</body-content>
+		<attribute>
+			<name>template</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>scope</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

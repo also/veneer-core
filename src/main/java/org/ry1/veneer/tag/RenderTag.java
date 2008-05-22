@@ -2,13 +2,9 @@
 
 package org.ry1.veneer.tag;
 
-import java.io.IOException;
+import org.ry1.veneer.VeneerSupport;
 
-import javax.servlet.jsp.JspException;
-
-import org.ry1.veneer.VeneerUtils;
-
-public class RenderTag extends VeneerTagSupport {
+public class RenderTag extends ScopedTag {
 	private String name;
 	private String partial;
 	
@@ -21,35 +17,22 @@ public class RenderTag extends VeneerTagSupport {
 	}
 	
 	@Override
-	public void doTag() throws JspException, IOException {
-		getContext().pushScope();
-		try {
-			// TODO discard output
-			if (getJspBody() != null) {
-				getJspBody().invoke(getJspContext().getOut());
-			}
-			
-			String value;
-			if (name != null) {
-				value = VeneerUtils.render(getRequest(), getResponse(), name);
-			}
-			else {
-				value = VeneerUtils.renderParial(getRequest(), getResponse(), partial);
-			}
-			// TODO check for null partial
-			
-			if (value != null) {
-				getJspContext().getOut().write(value);
-			}
+	public void doScoped() throws Exception {
+		if (getJspBody() != null) {
+			getBody();
 		}
-		catch (IOException ex) {
-			throw ex;
+		
+		String value;
+		if (name != null) {
+			value = VeneerSupport.render(getPageContext().getServletContext(), getRequest(), getResponse(), name);
 		}
-		catch (Exception ex) {
-			throw new JspException(ex);
+		else {
+			value = VeneerSupport.renderPartial(getPageContext().getServletContext(), getRequest(), getResponse(), partial);
 		}
-		finally {
-			getContext().popScope();
+		// TODO check for null partial
+		
+		if (value != null) {
+			getJspContext().getOut().write(value);
 		}
 	}
 }
