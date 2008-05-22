@@ -17,7 +17,7 @@
  * License along with Veneer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.ry1.veneer;
+package com.ryanberdeen.veneer;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;

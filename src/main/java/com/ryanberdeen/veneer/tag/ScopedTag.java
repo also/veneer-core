@@ -17,28 +17,38 @@
  * License along with Veneer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.ry1.veneer.tag;
+package com.ryanberdeen.veneer.tag;
 
 import java.io.IOException;
 
 import javax.servlet.jsp.JspException;
 
-
-public class TemplateTag extends VeneerTagSupport {
-	private String name;
-	private boolean skip = false;
+public abstract class ScopedTag extends VeneerTagSupport {
+	private String scopeName;
 	
-	public void setName(String name) {
-		this.name = name;
-	}
-	
-	public void setSkip(boolean skip) {
-		this.skip = skip;
+	public void setScope(String scopeName) {
+		this.scopeName = scopeName;
 	}
 	
 	@Override
 	public void doTag() throws JspException, IOException {
-		String templateName = skip ? null : name;
-		getContext().setTemplateName(templateName);
+		getContext().pushScope(scopeName);
+		try {
+			doScoped();
+		}
+		catch (JspException ex) {
+			throw ex;
+		}
+		catch (IOException ex) {
+			throw ex;
+		}
+		catch (Exception ex) {
+			throw new JspException(ex);
+		}
+		finally {
+			getContext().popScope();
+		}
 	}
+	
+	protected abstract void doScoped() throws Exception;
 }

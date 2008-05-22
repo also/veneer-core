@@ -17,9 +17,9 @@
  * License along with Veneer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.ry1.veneer.tag;
+package com.ryanberdeen.veneer.tag;
 
-import org.ry1.veneer.RenderContext;
+import com.ryanberdeen.veneer.RenderContext;
 
 
 public class ApplyTag extends ScopedTag {

@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Lesser General Public
  * License along with Veneer.  If not, see <http://www.gnu.org/licenses/>.
  */
-package org.ry1.veneer;
+package com.ryanberdeen.veneer;
 
 import java.util.HashMap;
 

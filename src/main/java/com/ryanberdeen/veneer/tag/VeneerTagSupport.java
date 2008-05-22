@@ -17,7 +17,7 @@
  * License along with Veneer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.ry1.veneer.tag;
+package com.ryanberdeen.veneer.tag;
 
 import java.io.CharArrayWriter;
 import java.io.IOException;
@@ -28,8 +28,8 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
-import org.ry1.veneer.RenderContext;
-import org.ry1.veneer.VeneerSupport;
+import com.ryanberdeen.veneer.RenderContext;
+import com.ryanberdeen.veneer.VeneerSupport;
 
 public class VeneerTagSupport extends SimpleTagSupport {
 	protected Object getAttribute(String name) {

@@ -25,11 +25,11 @@ License along with Veneer.  If not, see <http://www.gnu.org/licenses/>.
 	version="2.0">
 	<tlib-version>1.0</tlib-version>
 	<short-name>views</short-name>
-	<uri>http://ry1.org/tags/veneer</uri>
+	<uri>http://ryanberdeen.com/veneer/tags</uri>
 
 	<tag>
 		<name>value</name>
-		<tag-class>org.ry1.veneer.tag.ValueTag</tag-class>
+		<tag-class>com.ryanberdeen.veneer.tag.ValueTag</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>name</name>
@@ -40,7 +40,7 @@ License along with Veneer.  If not, see <http://www.gnu.org/licenses/>.
 
 	<tag>
 		<name>set</name>
-		<tag-class>org.ry1.veneer.tag.SetTag</tag-class>
+		<tag-class>com.ryanberdeen.veneer.tag.SetTag</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
 			<name>scope</name>
@@ -62,7 +62,7 @@ License along with Veneer.  If not, see <http://www.gnu.org/licenses/>.
 	<tag>
 		<name>template</name>
 		<tag-class>
-			org.ry1.veneer.tag.TemplateTag
+			com.ryanberdeen.veneer.tag.TemplateTag
 		</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
@@ -80,7 +80,7 @@ License along with Veneer.  If not, see <http://www.gnu.org/licenses/>.
 	<tag>
 		<name>render</name>
 		<tag-class>
-			org.ry1.veneer.tag.RenderTag
+			com.ryanberdeen.veneer.tag.RenderTag
 		</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
@@ -103,7 +103,7 @@ License along with Veneer.  If not, see <http://www.gnu.org/licenses/>.
 	<tag>
 		<name>apply</name>
 		<tag-class>
-			org.ry1.veneer.tag.ApplyTag
+			com.ryanberdeen.veneer.tag.ApplyTag
 		</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>

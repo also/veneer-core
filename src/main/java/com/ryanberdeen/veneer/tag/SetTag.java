@@ -17,28 +17,36 @@
  * License along with Veneer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.ry1.veneer.tag;
-
-import static org.ry1.veneer.RenderContext.CONTENT_FOR_LAYOUT_ATTRIBUTE_NAME;
+package com.ryanberdeen.veneer.tag;
 
 import java.io.IOException;
 
 import javax.servlet.jsp.JspException;
 
 
-public class ValueTag extends VeneerTagSupport {
-	private String name;
+public class SetTag extends VeneerTagSupport {
+	private String scopeName;
+	private String attributeName;
+	private Object value;
+	
+	public void setScopeName(String scopeName) {
+		this.scopeName = scopeName;
+	}
 	
 	public void setName(String name) {
-		this.name = name;
+		this.attributeName = name;
+	}
+	
+	public void setValue(Object value) {
+		this.value = value;
 	}
 	
 	@Override
 	public void doTag() throws JspException, IOException {
-		if (name == null) {
-			name = CONTENT_FOR_LAYOUT_ATTRIBUTE_NAME;
+		if (value == null && getJspBody() != null) {
+			value = getBody();
 		}
 		
-		getJspContext().getOut().write(getAttribute(name).toString());
+		setAttribute(scopeName, attributeName, value);
 	}
 }

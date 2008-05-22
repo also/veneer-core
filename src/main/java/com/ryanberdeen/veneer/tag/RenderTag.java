@@ -17,36 +17,39 @@
  * License along with Veneer.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package org.ry1.veneer.tag;
+package com.ryanberdeen.veneer.tag;
 
-import java.io.IOException;
+import com.ryanberdeen.veneer.VeneerSupport;
 
-import javax.servlet.jsp.JspException;
-
-
-public class SetTag extends VeneerTagSupport {
-	private String scopeName;
-	private String attributeName;
-	private Object value;
-	
-	public void setScopeName(String scopeName) {
-		this.scopeName = scopeName;
-	}
+public class RenderTag extends ScopedTag {
+	private String name;
+	private String partial;
 	
 	public void setName(String name) {
-		this.attributeName = name;
+		this.name = name;
 	}
 	
-	public void setValue(Object value) {
-		this.value = value;
+	public void setPartial(String partial) {
+		this.partial = partial;
 	}
 	
 	@Override
-	public void doTag() throws JspException, IOException {
-		if (value == null && getJspBody() != null) {
-			value = getBody();
+	public void doScoped() throws Exception {
+		if (getJspBody() != null) {
+			getBody();
 		}
 		
-		setAttribute(scopeName, attributeName, value);
+		String value;
+		if (name != null) {
+			value = VeneerSupport.render(getPageContext().getServletContext(), getRequest(), getResponse(), name);
+		}
+		else {
+			value = VeneerSupport.renderPartial(getPageContext().getServletContext(), getRequest(), getResponse(), partial);
+		}
+		// TODO check for null partial
+		
+		if (value != null) {
+			getJspContext().getOut().write(value);
+		}
 	}
 }
