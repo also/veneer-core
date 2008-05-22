@@ -19,13 +19,27 @@ You should have received a copy of the GNU Lesser General Public
 License along with Veneer.  If not, see <http://www.gnu.org/licenses/>.
 -->
 
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.ryanberdeen</groupId>
+	<groupId>com.ryanberdeen.veneer</groupId>
 	<artifactId>veneer</artifactId>
 	<packaging>jar</packaging>
 	<name>veneer</name>
 	<version>0.1-SNAPSHOT</version>
+	
+	<licenses>
+		<license>
+			<name>GNU General Public License</name>
+			<url>http://www.gnu.org/licenses/gpl.txt</url>
+		</license>
+		<license>
+			<name>GNU Lesser General Public License</name>
+			<url>http://www.gnu.org/licenses/lgpl.txt</url>
+		</license>
+	</licenses>
+	
 	<build>
 		<pluginManagement>
 			<plugins>
@@ -39,6 +53,7 @@ License along with Veneer.  If not, see <http://www.gnu.org/licenses/>.
 			</plugins>
 		</pluginManagement>
 	</build>
+	
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>
