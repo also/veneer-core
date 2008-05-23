@@ -42,12 +42,12 @@ public class VeneerSupport {
 		RenderContext renderContext = getContext(context, request);
 		return renderContext.render(request, response, renderContext.resolvePartialPath(name, renderContext.getCurrentUri()));
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	/*public static VeneerViewResolver getResolver(ServletRequest request) {
 		WebApplicationContext context = RequestContextUtils.getWebApplicationContext(request);
 		Map<String, VeneerViewResolver> resolvers = context.getBeansOfType(VeneerViewResolver.class);
-		
+
 		if (resolvers.size() > 0) {
 			return resolvers.values().iterator().next();
 		}
@@ -55,29 +55,54 @@ public class VeneerSupport {
 			return null;
 		}
 	}*/
-	
+
 	public static RenderContext getContext(ServletContext context, HttpServletRequest request) {
 		RenderContext renderContext = (RenderContext) request.getAttribute(RenderContext.ATTRIBUTE_NAME);
-		
+
 		if (renderContext == null) {
 			renderContext = new RenderContext(context, request);
 			request.setAttribute(RenderContext.ATTRIBUTE_NAME, renderContext);
 		}
-		
+
 		return renderContext;
 	}
-	
+
 	public static Configuration getConfiguration(ServletContext context) {
 		Configuration configuration = (Configuration) context.getAttribute(Configuration.ATTRIBUTE_NAME);
-		
+
 		if (configuration == null) {
 			configuration = new Configuration();
+
+			String prefix = context.getInitParameter(Configuration.class.getCanonicalName() + ".prefix");
+			if (prefix != null) {
+				configuration.setPrefix(prefix);
+			}
+
+			String suffix = context.getInitParameter(Configuration.class.getCanonicalName() + ".suffix");
+			if (suffix != null) {
+				configuration.setSuffix(suffix);
+			}
+
+			String partialPrefix = context.getInitParameter(Configuration.class.getCanonicalName() + ".partialPrefix");
+			if (suffix != null) {
+				configuration.setPartialPrefix(partialPrefix);
+			}
+
+			String defaultTemplateName = context.getInitParameter(Configuration.class.getCanonicalName() + ".defaultTemplateName");
+			if (defaultTemplateName != null) {
+				configuration.setDefaultTemplateName(defaultTemplateName);
+			}
+
+			String ignoreInvalidPaths = context.getInitParameter(Configuration.class.getCanonicalName() + ".ignoreInvalidPaths");
+			if ("true".equals(ignoreInvalidPaths)) {
+				configuration.setIgnoreInvalidPaths(true);
+			}
 			setConfiguration(context, configuration);
 		}
-		
+
 		return configuration;
 	}
-	
+
 	public static void setConfiguration(ServletContext context, Configuration configuration) {
 		context.setAttribute(Configuration.ATTRIBUTE_NAME, configuration);
 	}

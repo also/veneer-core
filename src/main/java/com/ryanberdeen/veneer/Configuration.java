@@ -24,8 +24,10 @@ public class Configuration {
 	
 	private String prefix = "/WEB-INF/jsp/";
 	private String suffix = ".jsp";
+	private String partialPrefix = "_";
 	private String defaultTemplateName = null;
 	private String outerScopeName = "main";
+	private boolean ignoreInvalidPaths;
 	
 	public String getPrefix() {
 		return prefix;
@@ -38,25 +40,41 @@ public class Configuration {
 	public String getSuffix() {
 		return suffix;
 	}
-	
+
 	public void setSuffix(String suffix) {
 		this.suffix = suffix;
 	}
-	
+
+	public String getPartialPrefix() {
+		return partialPrefix;
+	}
+
+	public void setPartialPrefix(String partialPrefix) {
+		this.partialPrefix = partialPrefix;
+	}
+
 	public String getDefaultTemplateName() {
 		return defaultTemplateName;
 	}
-	
+
 	public void setDefaultTemplateName(String defaultTemplateName) {
 		this.defaultTemplateName = defaultTemplateName;
 	}
-	
+
 	public String getOuterScopeName() {
 		return outerScopeName;
 	}
-	
+
 	public void setOuterScopeName(String outerScopeName) {
 		this.outerScopeName = outerScopeName;
+	}
+
+	public boolean getIgnoreInvalidPaths() {
+		return ignoreInvalidPaths;
+	}
+
+	public void setIgnoreInvalidPaths(boolean ignoreInvalidPaths) {
+		this.ignoreInvalidPaths = ignoreInvalidPaths;
 	}
 
 }
