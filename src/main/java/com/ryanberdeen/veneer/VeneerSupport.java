@@ -25,37 +25,34 @@ import javax.servlet.http.HttpServletResponse;
 
 public class VeneerSupport {
 	
+	/** Gets the attribute from the current scope.
+	 *
+	 * @return the attribute value, or <code>null</code> if none
+	 */
 	public static Object getAttribute(ServletContext context, HttpServletRequest request, String name) {
 		return getContext(context, request).getAttribute(name);
 	}
 	
+	/** Sets the value of the attribute in the current scope.
+	 */
 	public static void setAttribute(ServletContext context, HttpServletRequest request, String name, Object value) {
 		getContext(context, request).setAttribute(name, value);
 	}
 	
+	/** Renders a named view.
+	 */
 	public static String render(ServletContext context, HttpServletRequest request, HttpServletResponse response, String name) throws Exception {
-		RenderContext renderContext = getContext(context, request);
-		return renderContext.render(request, response, renderContext.resolveViewPath(name));
+		return getContext(context, request).render(response, name);
 	}
 	
+	/** Renders a named partial view.
+	 */
 	public static String renderPartial(ServletContext context, HttpServletRequest request, HttpServletResponse response, String name) throws Exception {
-		RenderContext renderContext = getContext(context, request);
-		return renderContext.render(request, response, renderContext.resolvePartialPath(name, renderContext.getCurrentUri()));
+		return getContext(context, request).renderPartial(response, name);
 	}
 
-	@SuppressWarnings("unchecked")
-	/*public static VeneerViewResolver getResolver(ServletRequest request) {
-		WebApplicationContext context = RequestContextUtils.getWebApplicationContext(request);
-		Map<String, VeneerViewResolver> resolvers = context.getBeansOfType(VeneerViewResolver.class);
-
-		if (resolvers.size() > 0) {
-			return resolvers.values().iterator().next();
-		}
-		else {
-			return null;
-		}
-	}*/
-
+	/** Returns the {@link RenderContext} for the request. If none exists, it is created.
+	 */
 	public static RenderContext getContext(ServletContext context, HttpServletRequest request) {
 		RenderContext renderContext = (RenderContext) request.getAttribute(RenderContext.ATTRIBUTE_NAME);
 
@@ -67,6 +64,11 @@ public class VeneerSupport {
 		return renderContext;
 	}
 
+	/** Returns the application's {@link Configuration}. If it doesn't exist, it is created.
+	 *  Configuration options are loaded from the <code>web.xml</code> init parameters, in
+	 *  the form of <code>com.ryanberdeen.veneer.Configuration.&lt;parameterName&gt;</code>.
+	 *  See {@link Configuration} for available parameters.
+	 */
 	public static Configuration getConfiguration(ServletContext context) {
 		Configuration configuration = (Configuration) context.getAttribute(Configuration.ATTRIBUTE_NAME);
 
@@ -103,6 +105,8 @@ public class VeneerSupport {
 		return configuration;
 	}
 
+	/** Sets the application's configuration.
+	 */
 	public static void setConfiguration(ServletContext context, Configuration configuration) {
 		context.setAttribute(Configuration.ATTRIBUTE_NAME, configuration);
 	}

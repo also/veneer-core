@@ -124,12 +124,24 @@ public class RenderContext {
 		return (String) getAttribute(URI_ATTRIBUTE_NAME);
 	}
 
-	public String render(HttpServletRequest request, HttpServletResponse response, String uri) throws Exception {
+	public String render(HttpServletResponse response, String name) throws Exception {
+		return renderUri(response, resolveViewPath(name));
+	}
+
+	public String renderMain(HttpServletResponse response, String name) throws Exception {
+		setTemplateName(getMainTemplateName());
+		return renderUri(response, resolveViewPath(name));
+	}
+
+	public String renderPartial(HttpServletResponse response, String name) throws Exception {
+		return renderUri(response, resolvePartialPath(name, getCurrentUri()));
+	}
+
+	public String renderUri(HttpServletResponse response, String uri) throws Exception {
 		VeneerHttpServletResponse cachingResponse = new VeneerHttpServletResponse(response);
 		setAttribute(URI_ATTRIBUTE_NAME, uri);
 
 		request.getRequestDispatcher(uri).include(request, cachingResponse);
-		// TODO show correct uri if partial is not found
 		if (cachingResponse.isNotFound() && !getConfiguration().getIgnoreInvalidPaths()) {
 			throw new FileNotFoundException(uri);
 		}
