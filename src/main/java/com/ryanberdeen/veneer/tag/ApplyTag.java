@@ -19,12 +19,22 @@
 
 package com.ryanberdeen.veneer.tag;
 
+import com.ryanberdeen.veneer.Configuration;
 import com.ryanberdeen.veneer.RenderContext;
 
-
+/** Applies a template to the tag body. The body is evaluated in a local scope.
+ * 
+ * @author Ryan Berdeen
+ *
+ */
 public class ApplyTag extends ScopedTag {
 	private String templateName;
 	
+	/** Sets the name of the template that will be applied.
+	 * The default is the template {@link Configuration#getDefaultTemplateName()}.
+	 *
+	 * @see RenderContext#setTemplateName(String)
+	 */
 	public void setTemplate(String templateName) {
 		this.templateName = templateName;
 	}

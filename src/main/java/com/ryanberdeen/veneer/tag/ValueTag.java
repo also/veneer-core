@@ -26,16 +26,25 @@ import java.io.IOException;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.JspFragment;
 
-
+/** Outputs the value of an attribute.
+ * 
+ * @author Ryan Berdeen
+ *
+ */
 public class ValueTag extends ScopedTag {
 	private String name;
 	private boolean optional;
 	private Object value;
 	
+	/** Sets the name of the attribute to output.
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 	
+	/** Sets whether or not the attribute is optional. If a required attribute
+	 * is not set, a {@link MissingValueException} will be thrown.
+	 */
 	public void setOptional(boolean optional) {
 		this.optional = optional;
 	}

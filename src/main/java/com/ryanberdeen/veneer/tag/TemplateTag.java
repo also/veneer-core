@@ -19,26 +19,46 @@
 
 package com.ryanberdeen.veneer.tag;
 
-import java.io.IOException;
+import com.ryanberdeen.veneer.RenderContext;
 
-import javax.servlet.jsp.JspException;
-
-
+/** Sets the template name and related context attributes.
+ * 
+ * @author Ryan Berdeen
+ *
+ */
 public class TemplateTag extends VeneerTagSupport {
-	private String name;
-	private boolean skip = false;
 	
+	/** Sets the name of the template.
+	 * 
+	 * @see RenderContext#setTemplateName(String)
+	 */
 	public void setName(String name) {
-		this.name = name;
+		getContext().setTemplateName(name);
 	}
 	
+	/** Sets whether or not to skip the template.
+	 * 
+	 * <p>This effectively sets the template to <code>null</code>.</p>
+	 */
 	public void setSkip(boolean skip) {
-		this.skip = skip;
+		if (skip) {
+			getContext().setTemplateName(null);
+		}
 	}
 	
-	@Override
-	public void doTag() throws JspException, IOException {
-		String templateName = skip ? null : name;
-		getContext().setTemplateName(templateName);
+	/** Sets the content type.
+	 * 
+	 * @see RenderContext#getContentType()
+	 */
+	public void setContentType(String contentType) {
+		getContext().setContentType(contentType);
+	}
+	
+	/** Sets the character encoding.
+	 * 
+	 * @see RenderContext#getCharacterEncoding()
+	 */
+	public void setCharacterEncoding(String characterEncoding) {
+		getContext().setCharacterEncoding(characterEncoding);
 	}
 }

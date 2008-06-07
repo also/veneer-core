@@ -23,20 +23,37 @@ import java.io.IOException;
 
 import javax.servlet.jsp.JspException;
 
-
+/** Sets an attribute in the named scope.
+ * 
+ * <p>The body of the tag is rendered before the value is set. To set an
+ * attribute whose body is evaluated when it is used, use {@link WithTag}.</p>
+ * 
+ * <p>The default scope is the current scope.</p>
+ * 
+ * @author Ryan Berdeen
+ *
+ */
 public class SetTag extends VeneerTagSupport {
 	private String scopeName;
 	private String attributeName;
 	private Object value;
 	
+	/** Sets the name of the scope in which to set the attribute.
+	 */
 	public void setScopeName(String scopeName) {
 		this.scopeName = scopeName;
 	}
 	
+	/** Sets the name of the attribute to set.
+	 */
 	public void setName(String name) {
 		this.attributeName = name;
 	}
 	
+	/** Sets the value of the attribute.
+	 * 
+	 * <p>If the value is set, the tag's body will be ignored.</p>
+	 */
 	public void setValue(Object value) {
 		this.value = value;
 	}
@@ -46,6 +63,9 @@ public class SetTag extends VeneerTagSupport {
 		setAttribute(scopeName, attributeName, getValue());
 	}
 	
+	/** Returns the value to set. This method can be overridden by subclasses
+	 * to set a custom value.
+	 */
 	protected Object getValue() throws JspException, IOException {
 		if (value == null && getJspBody() != null) {
 			return renderBody();

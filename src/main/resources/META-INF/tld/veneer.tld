@@ -85,7 +85,7 @@ License along with Veneer.  If not, see <http://www.gnu.org/licenses/>.
 		<tag-class>
 			com.ryanberdeen.veneer.tag.TemplateTag
 		</tag-class>
-		<body-content>scriptless</body-content>
+		<body-content>empty</body-content>
 		<attribute>
 			<name>name</name>
 			<required>false</required>
@@ -93,6 +93,16 @@ License along with Veneer.  If not, see <http://www.gnu.org/licenses/>.
 		</attribute>
 		<attribute>
 			<name>skip</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>contentType</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>characterEncoding</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

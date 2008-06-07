@@ -23,13 +23,24 @@ import java.io.IOException;
 
 import javax.servlet.jsp.JspException;
 
+/** Superclass for Veneer tags that create a new scope.
+ * 
+ * @author Ryan Berdeen
+ *
+ */
 public abstract class ScopedTag extends VeneerTagSupport {
 	private String scopeName;
 	
+	/** Sets the name of the new scope. This name is optional, the default 
+	 * scope name is <code>null</code>.
+	 */
 	public void setScope(String scopeName) {
 		this.scopeName = scopeName;
 	}
 	
+	/** Executes in a local scope. This method pushes a scope, invokes the
+	 * {@link #doScoped() doScoped()} method, and pops the scope.
+	 */
 	@Override
 	public void doTag() throws JspException, IOException {
 		boolean scoped = isScoped();
@@ -58,6 +69,9 @@ public abstract class ScopedTag extends VeneerTagSupport {
 	protected boolean isScoped() {
 		return true;
 	}
-	
+
+	/** Invoked inside the local scope by {@link #doTag()}.
+	 * 
+	 */
 	protected abstract void doScoped() throws Exception;
 }

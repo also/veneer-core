@@ -21,43 +21,23 @@ package com.ryanberdeen.veneer;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
+/** Support methods for using Veneer.
+ * @author Ryan Berdeen
+ *
+ */
 public class VeneerSupport {
-	
-	/** Gets the attribute from the current scope.
-	 *
-	 * @return the attribute value, or <code>null</code> if none
-	 */
-	public static Object getAttribute(ServletContext context, HttpServletRequest request, String name) {
-		return getContext(context, request).getAttribute(name);
-	}
-	
-	/** Sets the value of the attribute in the current scope.
-	 */
-	public static void setAttribute(ServletContext context, HttpServletRequest request, String name, Object value) {
-		getContext(context, request).setAttribute(name, value);
-	}
-	
-	/** Renders a named view.
-	 */
-	public static String render(ServletContext context, HttpServletRequest request, HttpServletResponse response, String name) throws Exception {
-		return getContext(context, request).render(response, name);
-	}
-	
-	/** Renders a named partial view.
-	 */
-	public static String renderPartial(ServletContext context, HttpServletRequest request, HttpServletResponse response, String name) throws Exception {
-		return getContext(context, request).renderPartial(response, name);
-	}
 
-	/** Returns the {@link RenderContext} for the request. If none exists, it is created.
+	/** Returns the {@link RenderContext} for the request. If none exists, one
+	 * is created and stored as a request attribute.
+	 * 
+	 * @see RenderContext#ATTRIBUTE_NAME
 	 */
 	public static RenderContext getContext(ServletContext context, HttpServletRequest request) {
 		RenderContext renderContext = (RenderContext) request.getAttribute(RenderContext.ATTRIBUTE_NAME);
 
 		if (renderContext == null) {
-			renderContext = new RenderContext(context, request);
+			renderContext = new RenderContext(getConfiguration(context), request);
 			request.setAttribute(RenderContext.ATTRIBUTE_NAME, renderContext);
 		}
 
