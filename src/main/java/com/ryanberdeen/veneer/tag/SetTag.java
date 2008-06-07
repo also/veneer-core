@@ -43,10 +43,15 @@ public class SetTag extends VeneerTagSupport {
 	
 	@Override
 	public void doTag() throws JspException, IOException {
+		setAttribute(scopeName, attributeName, getValue());
+	}
+	
+	protected Object getValue() throws JspException, IOException {
 		if (value == null && getJspBody() != null) {
-			value = getBody();
+			return renderBody();
 		}
-		
-		setAttribute(scopeName, attributeName, value);
+		else {
+			return value;
+		}
 	}
 }

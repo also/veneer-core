@@ -35,18 +35,19 @@ public class RenderTag extends ScopedTag {
 	
 	@Override
 	public void doScoped() throws Exception {
-		if (getJspBody() != null) {
-			getBody();
-		}
+		renderBody();
 		
 		String value;
+		
 		if (name != null) {
 			value = VeneerSupport.render(getPageContext().getServletContext(), getRequest(), getResponse(), name);
 		}
-		else {
+		else if(partial != null) {
 			value = VeneerSupport.renderPartial(getPageContext().getServletContext(), getRequest(), getResponse(), partial);
 		}
-		// TODO check for null partial
+		else {
+			throw new RuntimeException("Either name attribute or partial attribute is required");
+		}
 		
 		if (value != null) {
 			getJspContext().getOut().write(value);

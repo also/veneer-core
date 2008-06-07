@@ -24,21 +24,48 @@ import static com.ryanberdeen.veneer.RenderContext.CONTENT_FOR_LAYOUT_ATTRIBUTE_
 import java.io.IOException;
 
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.JspFragment;
 
 
-public class ValueTag extends VeneerTagSupport {
+public class ValueTag extends ScopedTag {
 	private String name;
+	private boolean optional;
+	private Object value;
 	
 	public void setName(String name) {
 		this.name = name;
 	}
 	
+	public void setOptional(boolean optional) {
+		this.optional = optional;
+	}
+	
 	@Override
-	public void doTag() throws JspException, IOException {
+	protected boolean isScoped() {
 		if (name == null) {
 			name = CONTENT_FOR_LAYOUT_ATTRIBUTE_NAME;
 		}
 		
-		getJspContext().getOut().write(getAttribute(name).toString());
+		value = getAttribute(name);
+		if (value == null) {
+			if (!optional) {
+				throw new MissingValueException("No value for '" + name + "'");
+			}
+		}
+		
+		// no need to scope for simple values
+		return value instanceof JspFragment;
+	}
+	
+	@Override
+	public void doScoped() throws JspException, IOException {
+		if (value != null) {
+			if (value instanceof JspFragment) {
+				renderBody();
+				value = renderFragment((JspFragment) value);
+			}
+			
+			getJspContext().getOut().write(value.toString());
+		}
 	}
 }

@@ -38,6 +38,6 @@ public class ApplyTag extends ScopedTag {
 		}
 		
 		renderContext.setTemplateName(templateName);
-		getJspContext().getOut().write(renderContext.applyTemplate(getResponse(), getBody()));
+		getJspContext().getOut().write(renderContext.applyTemplate(getResponse(), renderBody()));
 	}
 }

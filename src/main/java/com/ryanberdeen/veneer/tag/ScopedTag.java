@@ -32,7 +32,10 @@ public abstract class ScopedTag extends VeneerTagSupport {
 	
 	@Override
 	public void doTag() throws JspException, IOException {
-		getContext().pushScope(scopeName);
+		boolean scoped = isScoped();
+		if (scoped) {
+			getContext().pushScope(scopeName);
+		}
 		try {
 			doScoped();
 		}
@@ -46,8 +49,14 @@ public abstract class ScopedTag extends VeneerTagSupport {
 			throw new JspException(ex);
 		}
 		finally {
-			getContext().popScope();
+			if (scoped) {
+				getContext().popScope();
+			}
 		}
+	}
+	
+	protected boolean isScoped() {
+		return true;
 	}
 	
 	protected abstract void doScoped() throws Exception;

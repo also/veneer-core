@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
+import javax.servlet.jsp.tagext.JspFragment;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
 import com.ryanberdeen.veneer.RenderContext;
@@ -56,9 +57,14 @@ public class VeneerTagSupport extends SimpleTagSupport {
 		return (PageContext) getJspContext();
 	}
 	
-	protected String getBody() throws JspException, IOException {
+	protected String renderBody() throws JspException, IOException {
+		JspFragment jspBody = getJspBody();
+		return (jspBody != null) ? renderFragment(jspBody) : null;
+	}
+	
+	protected String renderFragment(JspFragment fragment) throws JspException, IOException {
 		CharArrayWriter writer = new CharArrayWriter();
-		getJspBody().invoke(writer);
+		fragment.invoke(writer);
 		return writer.toString();
 	}
 }
