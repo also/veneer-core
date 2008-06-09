@@ -28,15 +28,18 @@ License along with Veneer.  If not, see <http://www.gnu.org/licenses/>.
 	<uri>http://ryanberdeen.com/veneer/tags</uri>
 
 	<tag>
+		<description>Outputs an attribute value.</description>
 		<name>value</name>
 		<tag-class>com.ryanberdeen.veneer.tag.ValueTag</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
+			<description>The name of the attribute.</description>
 			<name>name</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<description>Whether the attribute is optional. Default false.</description>
 			<name>optional</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -45,19 +48,24 @@ License along with Veneer.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 
 	<tag>
+		<description>Sets an attribute value.</description>
 		<name>set</name>
 		<tag-class>com.ryanberdeen.veneer.tag.SetTag</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
+			<description>The scope in which to set the attribute.</description>
 			<name>scope</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<description>The name of the attribute to set.</description>
 			<name>name</name>
 			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<description>The value of the attribute to set.</description>
 			<name>value</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -66,42 +74,51 @@ License along with Veneer.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 
 	<tag>
+		<description>Sets an attribute to the body fragment. The body will be evaluated when the attribute is used.</description>
 		<name>with</name>
 		<tag-class>com.ryanberdeen.veneer.tag.WithTag</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
+			<description>The name of the scope in which to set the attribute.</description>
 			<name>scope</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<description>The name of the attribute to set.</description>
 			<name>name</name>
 			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
 
 	<tag>
+		<description>Sets the template name and options.</description>
 		<name>template</name>
 		<tag-class>
 			com.ryanberdeen.veneer.tag.TemplateTag
 		</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
+			<description>The name of the template.</description>
 			<name>name</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<description>If true, don't apply a template to the view.</description>
 			<name>skip</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<description>The content type of the view.</description>
 			<name>contentType</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<description>The character encoding of the view.</description>
 			<name>characterEncoding</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -109,27 +126,26 @@ License along with Veneer.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 
 	<tag>
+		<description>Renders a view (normal or partial). The body and the view are rendered in a local scope.</description>
 		<name>render</name>
 		<tag-class>
 			com.ryanberdeen.veneer.tag.RenderTag
 		</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
+			<description>The name of the normal view to render.</description>
 			<name>name</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<description>The name of the partial view to render.</description>
 			<name>partial</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>fragment</name>
-			<required>false</required>
-			<rtexprvalue>true</rtexprvalue>
-		</attribute>
-		<attribute>
+			<description>The name of the local scope created.</description>
 			<name>scope</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -137,17 +153,20 @@ License along with Veneer.  If not, see <http://www.gnu.org/licenses/>.
 	</tag>
 
 	<tag>
+		<description>Applies a template to the body. The body is rendered in a local scope.</description>
 		<name>apply</name>
 		<tag-class>
 			com.ryanberdeen.veneer.tag.ApplyTag
 		</tag-class>
 		<body-content>scriptless</body-content>
 		<attribute>
+			<description>The name of the template to apply.</description>
 			<name>template</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<description>The name of the local scope created.</description>
 			<name>scope</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
